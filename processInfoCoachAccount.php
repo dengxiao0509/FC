@@ -65,13 +65,14 @@ $commentaires = str_replace('\'','\\\'',$commentaires);
 $commentaires = str_replace("\x0a","\\\\n",$commentaires);
 $commentaires = $link->real_escape_string($commentaires);
 
-$requete = "UPDATE coachaccount SET displayname='$displayname',administratif='$administratif',metier='$metier',interlocuteur='$interlocuteur',integrateur='$integrateur',services='$services',projet='$projet',connaissanceit='$connaissanceit',commentaires='$commentaires' WHERE id=$accountid";
+$requete = "UPDATE coachaccount SET displayname=\"$displayname\",administratif=\"$administratif\",metier=\"$metier\",interlocuteur=\"$interlocuteur\",integrateur=\"$integrateur\",services=\"$services\",projet=\"$projet\",connaissanceit=\"$connaissanceit\",commentaires=\"$commentaires\" WHERE id=$accountid";
 mysqli_query($link,$requete) or erreur("requ\\352te incorrecte ($requete)");
 
 $result = "{\"result\":\"ok\"}";
 echo $result;
 
 // Libération des résultats 
-mysqli_free_result($resultats);
+// on n'a pas besoin de free la variable $result quand elle est du type string  
+//mysqli_free_result($result);
 
 ?>

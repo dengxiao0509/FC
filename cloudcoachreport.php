@@ -13,6 +13,7 @@
 body {
 	font-family: Verdana,Arial,Sans-serif;
 	font-size: 16px;
+	overflow : auto;
 }
 h1 {
 	font-size: 24px;
@@ -30,6 +31,7 @@ h1 {
 	overflow: auto;
 	clear: both;
 	font-size: 12px;
+	overflow : scroll;
 }
 tbody th {
 	text-align: center;
@@ -79,7 +81,7 @@ $dates{sprintf("%d-%02d",$anneeMin,$moisMin)} = $C_TRUE;	// ajout du mois en cou
 
 ?>
 
-<div id="entete"">
+<div id="entete">
 	<div style="float:left; padding: 10px 30px 20px 50px"><img src="/images/Logo-obs.gif"></div>
 	<div style="float:left"><h1>reporting Cloud Coach <span style="color:#ff7300">Flexible Computing</span></h1></div>
 </div>
@@ -98,8 +100,8 @@ $dates{sprintf("%d-%02d",$anneeMin,$moisMin)} = $C_TRUE;	// ajout du mois en cou
 			<h2>Nombre de dossiers traités</h2>
 <?php
 
-$cases = "";
-$types = "";
+$cases = [];
+$types = [];
 # --- Récupération des données cloud coach ---
 $requete = "SELECT DISTINCT cc.type FROM coachcase cc WHERE cc.offer='FCE' AND status<>'REJETE' and date>'$dateMin' ORDER BY type";
 $resultats = mysqli_query($link,$requete) or erreur(4,$link);
@@ -110,10 +112,21 @@ $types{"REJETE"} = $C_TRUE;	// on inclut les dossiers rejetés
 
 $requete = "SELECT DATE_FORMAT(cc.date,'%Y-%m'),cc.type,COUNT(cc.id),cc.status FROM coachcase cc WHERE cc.offer='FCE' AND cc.date>'$dateMin' GROUP BY DATE_FORMAT(cc.date,'%Y-%m'),cc.type,cc.status";
 $resultats = mysqli_query($link,$requete) or erreur(4,$link);
+
+//the index 'date' and 'status' may not exist, we need to check first
 while (list($date,$type,$nb,$status) = mysqli_fetch_row($resultats)) {
-	if ($status == "REJETE") { $cases{$date}{$status} += $nb; }
-	else { $cases{$date}{$type} += $nb; }
+	if ($status == "REJETE") { 
+		if(array_key_exists($date,$cases) && array_key_exists($status,$cases[$date])) 
+			$cases{$date}{$status} += $nb;
+		else  $cases{$date}{$status} = $nb;	
+	}
+	else { 
+		if(array_key_exists($date,$cases) && array_key_exists($type,$cases[$date]))
+			$cases{$date}{$type} += $nb;
+		else  $cases{$date}{$type} = $nb;	
+	}
 }
+
 echo "<table>\n";
 echo "<tr><th>Type</th>";
 foreach ($dates as $date => $dvalue) {
@@ -123,15 +136,20 @@ echo "</tr>\n";
 foreach ($types as $type => $tvalue) {
 	echo "<tr><td>$type</td>";
 	foreach ($dates as $date => $dvalue) {
-		echo "<td>".$cases{$date}{$type}."</td>";
+		//we need to check first whether the index exists or not
+		if(array_key_exists($date,$cases) && array_key_exists($type,$cases[$date])) 		
+			echo "<td>".$cases{$date}{$type}."</td>";
+		else echo "<td></td>";
 	}
 }
 echo "</tr>\n";
 echo "<tr><td>TOTAL</td>";
 foreach ($dates as $date => $dvalue) {
 	$total = 0;
+	//we need to check first whether the index exists or not
 	foreach ($types as $type => $tvalue) {
-		$total += $cases{$date}{$type};
+		if(array_key_exists($date,$cases) && array_key_exists($type,$cases[$date])) 
+			$total += $cases{$date}{$type};
 	}
 	echo "<td>$total</td>";
 }
@@ -162,21 +180,9 @@ echo "</tr>\n";
 echo "</table>\n";
 
 ?>
-			<h2>Proportion de clients actuels passés par la cellule Cloud Coach : 
-<?php
-$cases = "";
-# --- Récupération des données cloud coach ---
-$requete = "SELECT COUNT(DISTINCT ca.id) FROM coachcase cc LEFT JOIN coachaccount ca ON (cc.coachaccount_fk=ca.id) WHERE cc.offer='FCE' AND cc.status<>'REJETE' AND ca.fcaccount_fk IS NOT NULL";
-$resultats = mysqli_query($link,$requete) or erreur(4,$link);
-list($nbcoachaccount) = mysqli_fetch_row($resultats);
+			<h2>Proportion de clients actuels passés par la cellule Cloud Coach : </h2>
 
-$requete = "SELECT COUNT(DISTINCT account.id) FROM ordering LEFT JOIN account ON (ordering.clientaccount_fk=account.id) WHERE ordering.offer='FCEV1'";
-$resultats = mysqli_query($link,$requete) or erreur(4,$link);
-list($nbvhmaccount) = mysqli_fetch_row($resultats);
-
-echo sprintf("%d",($nbcoachaccount/$nbvhmaccount)*100)," % ($nbcoachaccount / $nbvhmaccount)</h2>\n";
-?>
-			<h2>Commandes de prestations
+			<h2>Commandes de prestations</h2>
 <?php
 $cases = "";
 # --- Récupération des données cloud coach ---
@@ -205,7 +211,7 @@ echo "</tr>\n";
 echo "</table>\n";
 
 ?>
-			<h2>Détail des prestations
+			<h2>Détail des prestations</h2>
 <?php
 $cases = "";
 # --- Récupération des données cloud coach ---
@@ -291,7 +297,7 @@ echo "</tr>\n";
 echo "</table>\n";
 
 ?>
-			<h2>Commandes de prestations : 
+			<h2>Commandes de prestations : </h2>
 <?php
 $cases = "";
 # --- Récupération des données cloud coach ---
@@ -320,7 +326,7 @@ echo "</tr>\n";
 echo "</table>\n";
 
 ?>
-			<h2>Détail des prestations
+			<h2>Détail des prestations</h2>
 <?php
 $cases = "";
 # --- Récupération des données cloud coach ---

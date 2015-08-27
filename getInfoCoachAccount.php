@@ -5,7 +5,7 @@ include 'include/connexionBase.php';
 
 
 function erreur($msgErreur) {
-  echo "Erreur: $msgErreur ($requete)";
+  echo "{\"result\":\"".$msgErreur."\"}";
   exit;
 }
 
@@ -30,7 +30,10 @@ if ($account == "") { erreur("Aucun id de compte fourni"); }
 $requete = "SELECT ca.displayname,ca.administratif,ca.metier,ca.interlocuteur,ca.integrateur,ca.services,ca.projet,ca.connaissanceit,ca.commentaires FROM coachaccount ca WHERE ca.id=$account";
 $resultats = mysqli_query($link,$requete) or erreur(4,$link);
 if (list($displayname,$administratif,$metier,$interlocuteur,$integrateur,$services,$projet,$connaissanceit,$commentaires) = mysqli_fetch_row($resultats)) {
-	$displayname = str_replace('"','\'',$displayname);
+/* 	
+	$displayname = str_replace('"','\"',$displayname);
+	$displayname = str_replace("'",'\'',$displayname);
+
 	$administratif = str_replace('"','\'',$administratif);
 	$metier = str_replace('"','\'',$metier);
 	$interlocuteur = str_replace('"','\'',$interlocuteur);
@@ -40,8 +43,9 @@ if (list($displayname,$administratif,$metier,$interlocuteur,$integrateur,$servic
 	$commentaires = str_replace('"','\'',$commentaires);
 //	$services = str_replace("\\n", "<br>", $services);
 //	$projet = str_replace("\\n", "<br>", $projet);
-//	$commentaires = str_replace("\\n", "<br>", $commentaires);
+//	$commentaires = str_replace("\\n", "<br>", $commentaires); */
 	$result = "\"accountid\":\"$account\",\"displayname\":\"$displayname\",\"administratif\":\"$administratif\",\"metier\":\"$metier\",\"interlocuteur\":\"$interlocuteur\",\"integrateur\":\"$integrateur\",\"services\":\"$services\",\"projet\":\"$projet\",\"connaissanceit\":\"$connaissanceit\",\"commentaires\":\"$commentaires\"";
+	
 }
 
 

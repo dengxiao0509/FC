@@ -7,7 +7,7 @@ include 'include/connexionBase.php';
 
 
 function erreur($msgErreur) {
-  echo "Erreur: $msgErreur ($requete)";
+  echo "Erreur: $msgErreur";
   exit;
 }
 
@@ -46,6 +46,9 @@ if ($vhmaccount != "" && $account == "") {			# on tente de récupérer l'account à
 	$resultats = mysqli_query($link,$requete) or erreur(4,$link);
 	list($account) = mysqli_fetch_row($resultats);
 }
+
+$result = "";
+
 $result .= "\"coachaccount\":\"$account\"";
 
 # --- Calcul du filtre ---
@@ -95,12 +98,35 @@ if ($vhmaccount == "" || $account != "") {
 //echo $requete;
 	$resultats = mysqli_query($link,$requete) or erreur(4,$link);
 	while (list($id,$coach,$date,$offer,$coachaccount_fk,$accountname,$status,$type,$packname,$packremainingtime,$packid,$amount,$details,$fcaccountfk) = mysqli_fetch_row($resultats)) {
+		
 		if ($res) { $res .= ","; }
 		if ($amount == "0") { $amount = ""; }
 		$accountname = str_replace('"','\'',$accountname);
 		$details = str_replace('"','\'',$details);
-	$caseid[$id] = 1;
-		$res .= "{\"id\":$id,\"coach\":\"$coach\",\"date\":\"$date\",\"offer\":\"$offer\",\"accountid\":\"$coachaccount_fk\",\"fcaccountfk\":\"$fcaccountfk\",\"accountname\":\"$accountname\",\"status\":\"$status\",\"type\":\"$type\",\"packname\":\"$packname\",\"packremainingtime\":\"$packremainingtime\",\"packid\":\"$packid\",\"amount\":\"$amount\",\"details\":\"$details\"}";
+		$caseid[$id] = 1;
+		
+		//get files corresponding to this case
+		$dir = "files/case" . $id;
+		$PJFiles = "";
+
+		if(is_dir($dir)) {
+			if($dh = opendir($dir)) {
+				while(($file = readdir($dh)) !== false) {
+					if($file != "." && $file != "..")	$PJFiles .= "\"". $file ."\",";
+				}
+			closedir($dh);
+			}
+			$PJFiles = substr($PJFiles,0,-1); 
+			$PJFiles = "[".$PJFiles."]"; 
+		}
+		
+		else $PJFiles = "[]";
+		
+		
+	//	$result = "\"id\":\"$caseid\",\"cloudcoach\":\"$cloudcoach\",\"offer\":\"$offer\",\"priority\":\"$priority\",\"accountname\":\"$accountname\",\"date\":\"$date\",\"status\":\"$status\",\"type\":\"$type\",\"packname\":\"$packname\",\"packremainingtime\":\"$packremainingtime\",\"packid\":\"$packid\",\"amountineuro\":\"$amountineuro\",\"details\":\"$details\",\"PJFiles\":$PJFiles";
+
+			
+		$res .= "{\"id\":$id,\"coach\":\"$coach\",\"date\":\"$date\",\"offer\":\"$offer\",\"accountid\":\"$coachaccount_fk\",\"fcaccountfk\":\"$fcaccountfk\",\"accountname\":\"$accountname\",\"status\":\"$status\",\"type\":\"$type\",\"packname\":\"$packname\",\"packremainingtime\":\"$packremainingtime\",\"packid\":\"$packid\",\"amount\":\"$amount\",\"details\":\"$details\",\"PJFiles\":$PJFiles}";
 		#$onecase = array("id"=>(int)$id,"coach"=>"$coach","date"=>"$date","accountid"=>"$coachaccount_fk","accountname"=>"$accountname","status"=>"$status","type"=>"$type","packname"=>"$packname","packremainingtime"=>"$packremainingtime","packid"=>"$packid","amount"=>"$amount","details"=>"$details");
 		#array_push($TCase,$onecase);
 	}

@@ -87,6 +87,7 @@
 	-webkit-box-shadow:3px 3px 6px #A9A9A9;
 	box-shadow:3px 3px 6px 0 #A9A9A9;
 }
+
 .coachcase {
 	border:1px solid #C0C0C0;
 	color: black;
@@ -120,6 +121,7 @@
 	float: right;
 	max-width: 200px;
 	text-align: right;
+	postion: relative;
 }
 .ccdate {
 	position: relative;
@@ -134,6 +136,11 @@
 	position: relative;
 	font-size: 20px;
 }
+
+.ccaccount:hover {
+	margin-left : 3px;
+}
+
 .ccstatus {
 	position: relative;
 	text-align: left;
@@ -167,6 +174,20 @@
 	position: relative;
 	font-style: italic;
 	font-size: 15px;
+}
+
+.cctypedevisamount {
+	border:1px solid #C0C0C0;
+	float: left;
+	position: relative;
+	background: green;
+	color: white;
+	padding: 2px;
+	top: -2px;
+	margin: 0px 40px;
+	font-size: 14px;
+	text-align: center;
+	width: 90px;
 }
 .cctypepacknom {
 	float: left;
@@ -210,18 +231,69 @@
 	margin-top: 5px;
 }
 .ccoffer {
-	float: left;
+	float: right;
 	font-size: 20px;
 	margin-right: 20px;
-}
-.ccplusevent {
-	float: left;
-}
-.cclinkdetails {
-	clear: both;
 	margin-top: 15px;
-	color: black;
 }
+
+.ccprocess {
+	position: relative;
+	margin-top: 0px;
+	max-width : 250px;
+	white-space: nowrap;
+	margin-right: 20px;
+}
+
+.proIcon {
+	height : 18px;
+	width: 18px;
+	margin-top : 2px;
+}
+
+.proIcon:hover {
+	background-color : orange;
+	border: 1px solid;
+}
+
+
+// .cclinkdetails {
+	// clear: both;
+	// color: black;
+// }
+
+
+.cclinkdetails {
+	float: left;
+	position: relative;
+	margin-left: 10px;
+	margin-top: 3px;
+	//padding-top : 5px;
+}
+
+.cclinkdetails:hover {
+	background-color : orange;
+	box-shadow: 2px 2px 2px #888888;
+}
+
+.ccplus{
+	float: left;
+	position: relative;
+}
+
+.ccmodify {
+	float: left;
+	position: relative;
+	margin-left: 10px;
+}
+
+.ccdelete{
+	float: left;
+	position: relative;
+	margin-left: 10px;
+}
+
+
 .coachevent {
 	border:1px solid #C0C0C0;
 	color: black;
@@ -289,11 +361,46 @@
 	float: left;
 	left: 10px;
 }
+
+.ceprocess {
+	float: right;
+	position: relative;
+	margin-left: 10px;
+	white-space : nowrap;
+}
+
+.cemodify {
+	float: left;
+	position: relative;
+	margin-left: 15px;
+}
+
+.cedelete{
+	float: left;
+	position: relative;
+	margin-left: 15px;
+}
+
+.eventproIcon {
+	height : 12px;
+	width: 12px;
+	margin-right : 0px;
+	//float : right;
+ }
+ 
+ .eventproIcon:hover {
+	 background-color : #e8e8e8;
+	 box-shadow: 2px 2px 2px #888888;
+
+ }
+
+
 .cedetails {
 	text-align: right;
 	position: relative;
 	max-width: 550px;
 	font-size: 11px;
+	margin-top: 25px;
 }
 .celogstatus {
 	text-align: right;
@@ -327,6 +434,7 @@ div.newccprestation {
 }
 .ui-button-text.casepackfc {
 	width:100px;
+	display: flex;
 }
 .ui-state-active {
 	background: #FF7300;
@@ -361,6 +469,7 @@ input[type='text'].coachdate {
 #origname {
 	vertical-align: middle;
 	text-align: center;
+	float : left;
 }
 .ui-autocomplete {
 	font-size: 12px;
@@ -482,7 +591,87 @@ transform-origin: 100% 240px;
 .infoAccountback input[type='text'] {
 	height: 25px;
 }
+
+ /*	image shown when uploading files */
+#f1_upload_process{
+	z-index:100;
+	position:absolute;
+	visibility:hidden;
+	text-align:center;
+	width:400px;
+	height : 60px;
+	margin:0px;
+	padding:0px;
+	background-color:#fff;
+	border:1px solid #ccc;
+}
+
+
+#upFileForm {
+	float : left;
+}
+
+/*set icon of list of files uploaded within the form(new or modify case)*/
+#PJlist ul {
+	list-style-type : url('/images/clips2.png');
+	padding: 0px;
+	margin: 0px;
+}
+
+#PJlist li {
+	background: url('/images/clips2.png');
+	background-size: 18px 18px;
+	background-repeat: no-repeat;
+    background-position: 0px center;
+    padding-left: 20px; 
+	display: block;
+	float : left;
+	margin-left : 20px;
+}
+
+/*the delete icon used to delete uploaded files*/
+.deleteFileIcon {
+	margin-left : 15px;
+	height : 8px;
+	weight : 8px;
+}
+
+.deleteFileIcon:hover {
+	background-color :lightgrey;
+}
+
+
+#listPJ {
+	clear : both;
+	float : left;
+	margin-top : 10px; 
+}
+
+
+/*set the icon of list of uploaded files in the case envelop*/
+#listPJ ul {
+	list-style-type : url('/images/clips2.png');
+	padding: 0px;
+	margin: 0px;
+}
+#listPJ li{
+	background: url('/images/clips2.png');
+	background-size: 18px 18px;
+	background-repeat: no-repeat;
+    background-position: 0px center;
+    padding-left: 20px; 
+	display: block;
+	float : left;
+	margin-right : 20px;
+}
+
+/*define the color of clickable text, e.g. the uploaded file name*/
+a:link {
+	color : orange;
+}
+
 </style>
+
 <script>
 	var coachvhmaccount = "";
 	var coachaccount = "";
@@ -492,10 +681,40 @@ transform-origin: 100% 240px;
 	var coachorder = "";
 	var coachdate = "";
 	var coachrecherche = "";
+	var caseofferchange = 0;
+	var packid ="";
+	
+	// used to store all the offers existed
+	var offreArray = [];
+	// var packAmount = { "demarrage":"220", "optimisation":"160", "expert1h":"120", "expert2h":"220", "expert4h":"400", "expertannee":"1500", "prestadevis":"", "logbronze":"300", "logsilver":"550", "loggold":"1000", "logplatinum":"1500", "formation1h":"160", "formation2h":"290", "formation4h":"590", "formationVCD":"600" };
+	// var packTime = { "expert1h":"60", "expert2h":"120", "expert4h":"240", "expertannee":"600", "formation1h":"60", "formation2h":"120", "formation4h":"240", "formationVCD":"240" };
+	var packTime = [];
+	var packAmount = [];
+		
 </script>
+
+<?php
+	echo "<script>" ;
+	$i=0;
+	
+	// get all the offers' names
+	foreach($offreArray as $offreItem) {	
+		echo "offreArray[".$i."]="."\"".$offreItem->offre."\";" ;	
+		$i++;
+	}
+	
+	// get the remaining time and money of all the prestations
+	foreach ($allPrestations as $preItem){
+		echo "packTime[\"".$preItem->nomc."\"] = \"".$preItem->temps."\";
+		packAmount[\"".$preItem->nomc."\"] = \"".$preItem->montant."\";";
+	} 
+	echo"</script>";	
+?>
+
 <div id="coach">
 	<div id="headcoach">
-		<div style="float:left;padding:0px" onclick="ajaxCoach()"><img src="/images/refresh.png"></div>
+		<div id="refreshIcon" title="Mise à jour" style="float:left;padding:0px" onclick="ajaxCoach()"><img src="/images/refresh.png"></div>
+		
 		<div id="titlecoach">
 			<h2>Interventions Cloud Coach</h2>
 			<div><span id="nbcases"></span> affaire<span id="plurielnbcases"></span> / <span id="nbevents"></span> évènement<span id="plurielnbevents"></span></div>
@@ -504,7 +723,7 @@ transform-origin: 100% 240px;
 			<div><img src="/images/infoaccount.png"></div>
 		</div>
 		<div id="newcasecoach">
-			<div><img src="/images/caseplus.png"></div>
+			<div><img src="/images/caseplus.png" title="Créer un nouveau dossier"></div>
 		</div>
 		<div style="clear:both"></div>
 	</div>
@@ -516,16 +735,22 @@ transform-origin: 100% 240px;
 			</div>
 		</div>
 	</div>
+
 	<div id="newCase">
-		<form id="formCase" action="javascript:ajaxNewCase()" method="POST">
+		<form id="formCase" action="javascript:ajaxNewCase()" method="POST" enctype="multipart/form-data">
 			<table style="font-size: 12px">
+				<tr><td><input type="hidden" name="caseidNewCase" value=""></td></tr>
 				<tr id="newcaseoffer">
 					<td>Offre</td>
 					<td>
 						<div id="buttonOffer">
-							<input type="radio" id="caseoffer1" name="caseoffer" value="FCE"><label for="caseoffer1">FCE</label> 
-							<input type="radio" id="caseoffer2" name="caseoffer" value="FS"><label for="caseoffer2">FS</label> 
-							<input type="radio" id="caseoffer3" name="caseoffer" value="FCA"><label for="caseoffer3">FCA</label> 
+							<?php
+								$i=1;
+								foreach($offreArray as $offreItem) {
+									echo "<input type=\"radio\" id=\"caseoffer" . $i . "\" name=\"caseoffer\" value=" . $offreItem->offre . "><label for=\"caseoffer" . $i . "\">" . $offreItem->offre . "</label>";
+									$i++ ;
+								}
+							?>
 						</div>
 					</td>
 				</tr>
@@ -561,89 +786,113 @@ transform-origin: 100% 240px;
 						</div>
 					</td>
 				</tr>
-				<tr id="casePackFC"">
-					<td style="vertical-align:middle">Prestation</td>
+				
+				<?php
+				foreach($offreArray as $offreItem) {
+				
+				$offreName = $offreItem->offre;				
+				
+				echo "<tr id=\"casePack".$offreName."\">
+					<td style=\"vertical-align:middle\">Prestation</td>
 					<td>
-						<div id="buttonPackFC">
-							<div class="newccprestation">
-							<input type="radio" id="casepackfc1" name="casepackfc" value="demarrage"><label for="casepackfc1">Démarrage</label><br/>
-							<input type="radio" id="casepackfc2" name="casepackfc" value="optimisation"><label for="casepackfc2">Optimisation</label>
-							</div>
-							<div class="newccprestation">
-							<input type="radio" id="casepackfc4" name="casepackfc" value="expert1h"><label for="casepackfc4">Expert 1H</label><br/>
-							<input type="radio" id="casepackfc5" name="casepackfc" value="expert2h"><label for="casepackfc5">Expert 2H</label><br/>
-							<input type="radio" id="casepackfc6" name="casepackfc" value="expert4h"><label for="casepackfc6">Expert 4H</label>
-							<br/>
-							<input type="radio" id="casepackfc7" name="casepackfc" value="expertannee"><label for="casepackfc7">Expert Année</label>
-							</div>
-							<div class="newccprestation">
-							<input type="radio" id="casepackfc8" name="casepackfc" value="logbronze"><label for="casepackfc8">Logiciel Bronze</label><br/>
-							<input type="radio" id="casepackfc9" name="casepackfc" value="logsilver"><label for="casepackfc9">Logiciel Silver</label><br/>
-							<input type="radio" id="casepackfc10" name="casepackfc" value="loggold"><label for="casepackfc10">Logiciel Gold</label><br/>
-							<input type="radio" id="casepackfc11" name="casepackfc" value="logplatinum"><label for="casepackfc11">Logiciel Platinum</label>
-							</div>
-							<div class="newccprestation">
-							<input type="radio" id="casepackfc12" name="casepackfc" value="prestadevis"><label for="casepackfc12">Sur devis</label>
-							</div>
-							<div style="clear: both"></div>
-						</div>
-						<div style="text-align: left">
-							Montant <input name="amountfc" type=text value="" style="width:50px">
+						<div id=\"buttonPack".$offreName."\">";
+							
+								$i=1;
+								
+								foreach($offreItem->prestationPacks as $prePackItem) {
+									echo "<div class=\"newccprestation\">";
+									foreach($prePackItem as $preItem) {
+									echo "<input type=\"radio\" id=\"casepack".$offreName.$i."\" name=\"casepack".$offreName."\" value=".$preItem->nomc."><label for=\"casepack".$offreName.$i."\">".$preItem->noml."</label><br/>";
+									$i++ ;
+									}
+									echo "</div>";
+								}
+				echo		"<div style=\"clear: both\"></div>
 						</div>
 					</td>
-				</tr>
-				<tr id="casePackFS">
-					<td style="vertical-align:middle">Prestation</td>
-					<td>
-						<div id="buttonPackFS">
-							<input type="radio" id="casepackfs3" name="casepackfs" value="formation1h"><label for="casepackfs3">Expertise 1H</label>
-							<input type="radio" id="casepackfs1" name="casepackfs"  value="formation2h"><label for="casepackfs1">Formation 2H</label> 
-							<input type="radio" id="casepackfs2" name="casepackfs" value="formation4h"><label for="casepackfs2">Formation 4H</label> 
-						</div>
-						<div style="text-align: left">
-							Montant <input name="amountfs" type=text value="" style="width:50px">
-						</div>
-					</td>
-				</tr>
+				</tr>";
+				}
+				/*
 				<tr id="casePackFCA">
 					<td style="vertical-align:middle">Prestation</td>
 					<td>
 						<div id="buttonPackFCA">
-							<input type="radio" id="casepackfca1" name="casepackfca" value="formationVCD"><label for="casepackfca1">Formation vCD</label>
-							<input type="radio" id="casepackfca2" name="casepackfca"  value="prestaFCA"><label for="casepackfca2">Autre</label> 
+							<?php
+								$i=1;
+								foreach($FCAPrestationArray as $packItem) {
+									echo "<div class=\"newccprestation\">";
+									foreach($packItem as $preItem) {
+									echo "<input type=\"radio\" id=\"casepackfca" . $i . "\" name=\"casepackfca\" value=" . $preItem->nomc . "><label for=\"casepackfca" . $i . "\">" . $preItem->noml . "</label><br/>";
+									$i++ ;
+									}
+									echo "</div>";
+								}
+							?>	
+							<div style="clear: both"></div>	
 						</div>
-						<div style="text-align: left">
-							Montant <input name="amountfca" type=text value="" style="width:50px">
-						</div>
+					</td>
+				</tr> */
+				?>
+				<tr id="amountdiv">
+					<td></td>
+					<td>
+					<div style="text-align: left">
+							Montant <input name="amountinput" type=text value="" style="width:50px">
+					</div>
 					</td>
 				</tr>
 				<tr id="cccoachincharge">
 					<td>Coach en charge</td>
 					<td>
 						<div id="buttonCCCoachEnCharge">
-							<input type="radio" id="ccnomcoach1" name="ccnomcoach" value="Myriam"><label for="ccnomcoach1">Myriam</label> 
-							<input type="radio" id="ccnomcoach2" name="ccnomcoach" value="Pierre"><label for="ccnomcoach2">Pierre</label> 
-							<input type="radio" id="ccnomcoach3" name="ccnomcoach" value="Mathieu"><label for="ccnomcoach3">Mathieu</label>
-
-							<input type="radio" id="ccnomcoach4" name="ccnomcoach" value="Yoann"><label for="ccnomcoach4">Yoann</label>
-							<input type="radio" id="ccnomcoach5" name="ccnomcoach" value="Fabien"><label for="ccnomcoach5">Fabien</label>
-							<input type="radio" id="ccnomcoach6" name="ccnomcoach" value="Laurent"><label for="ccnomcoach6">Laurent</label>
-							<input type="radio" id="ccnomcoach7" name="ccnomcoach" value="TIO2"><label for="ccnomcoach7">TIO2</label>
-							<input type="radio" id="ccnomcoach8" name="ccnomcoach" value="Christophe"><label for="ccnomcoach8">Christophe</label>
+							<?php		
+							$i=1;
+							foreach($cloudcoachArray as $ccItem) {
+								if($ccItem->actif == "O"){ 
+								echo "<input type=\"radio\" id=\"ccnomcoach" . $i . "\" name=\"ccnomcoach\" value=" . $ccItem->prenom . "><label for=\"ccnomcoach" . $i . "\">" . $ccItem->prenom . "</label>";					
+								$i++ ;
+								}
+							}
+							?>
 						</div>
 					</td>
 				</tr>
+				<tr id="pjuploaded">	
+				<td>PJ Téléchargé</td>
+				<td>
+					<div id="PJlist">
+					
+					</div>
+				</td>
+				</tr>	
+				
 			</table>
 		</form>
-		<button id="buttonCCReset" class="coachformbutton" onclick="resetNewCase()">Reset</button>
-		<button id="buttonCCSubmit" class="coachformbutton" onclick="$('#formCase').submit()">Valider</button>
+		
+		
+		<form action="upload.php" id="upFileForm" method="post" enctype="multipart/form-data" target="upload_target" onsubmit="startUpload();">
+			<img src="/images/clip.jpg" id="upfileIcone" style="cursor:pointer" title="Ajouter des fichiers" alt="Ajouter des fichiers" height="40" width="40"/>
+			<span id="selectedFile"></span>
+			<input type="file" name="fileToUpload" id="fileToUpload" style="display:none" />
+			<input type="hidden" name="dirofPJ" value="dirofPJ">
+			<input type="submit" id="addButton" value="Joindre" name="submit"/>
+		</form>
+		
+		<p id="f1_upload_process"> Uploading...<br/><img src='/images/loader.gif' /> </p>
+		
+		<iframe id="upload_target" name="upload_target" src="#" style="width:0;height:0;border:0px solid #fff;">
+		</iframe>
+		
+		<button id="buttonCCReset" class="coachformbutton" onclick="resetNewCasebyButton()">Reset</button>
+		<button id="buttonCCSubmit" class="coachformbutton" onclick="submitFormCase()">Valider</button>
 	</div>
+
 
 	<div id="newEvent">
 		<form id="formEvent" action="javascript:ajaxNewEvent()" method="POST">
 			<input type="hidden" name="caseid" value="">
 			<table style="font-size: 12px">
-				<tr id="eventdate"><td>Date</td><td><input type="text" name="eventdate" class="coachdate"></div></td></tr>
+				<tr id="eventdate"><td>Date</td><td><input type="text" name="eventdate" class="coachdate"></td></tr>
 				<tr>
 					<td>Initiateur</td>
 					<td>
@@ -679,28 +928,28 @@ transform-origin: 100% 240px;
 					<td>Type</td>
 					<td>
 						<div id="buttonEventType">
-							<input type="radio" id="eventtype1" name="eventtype" value="echange" disabled><label for="eventtype1">Client <=> Coach</label> 
+							<input type="radio" id="eventtype1" name="eventtype" value="echange" disabled><label for="eventtype1">Client &lt;=&gt; Coach</label> 
 							<input type="radio" id="eventtype2" name="eventtype" value="absent" disabled><label for="eventtype2">Appel infructueux</label> 
 						</div>
 					</td>
 				</tr>
-				<tr><td style="vertical-align:middle">Détails</td><td><textarea name="cedetails" value="" width="500"></textarea></td></tr>
+				<tr><td style="vertical-align:middle">Détails</td><td><textarea name="cedetails" style="width:500"></textarea></td></tr>
 				<tr id="cecoachincharge">
 					<td>Coach en charge</td>
 					<td>
 						<div id="buttonCECoachEnCharge">
-							<input type="radio" id="cenomcoach1" name="cenomcoach" value="Myriam"><label for="cenomcoach1">Myriam</label> 
-							<input type="radio" id="cenomcoach2" name="cenomcoach" value="Pierre"><label for="cenomcoach2">Pierre</label> 
-							<input type="radio" id="cenomcoach3" name="cenomcoach" value="Mathieu"><label for="cenomcoach3">Mathieu</label>
-							<input type="radio" id="cenomcoach4" name="cenomcoach" value="Yoann"><label for="cenomcoach4">Yoann</label>
-							<input type="radio" id="cenomcoach5" name="cenomcoach" value="Fabien"><label for="cenomcoach5">Fabien</label>
-							<input type="radio" id="cenomcoach6" name="cenomcoach" value="Laurent"><label for="cenomcoach6">Laurent</label>
-							<input type="radio" id="cenomcoach7" name="cenomcoach" value="TIO2"><label for="cenomcoach7">TIO2</label>
-							<input type="radio" id="cenomcoach8" name="cenomcoach" value="Christophe"><label for="cenomcoach8">Christophe</label>
+							<?php		
+							$i=1;
+							foreach($cloudcoachArray as $ccItem) {
+								echo "<input type=\"radio\" id=\"cenomcoach" . $i . "\" name=\"cenomcoach\" value=" . $ccItem->prenom . "><label for=\"cenomcoach" . $i . "\">" . $ccItem->prenom . "</label>";					
+								$i++ ;
+							}
+							?>
+						
 						</div>
 					</td>
 				</tr>
-				<tr>
+				<tr id="buttonNewCaseStatusTR">
 					<td>Nouvel état dossier</td>
 					<td>
 						<div id="buttonNewCaseStatus">
@@ -713,25 +962,51 @@ transform-origin: 100% 240px;
 						</div>
 					</td>
 				</tr>
-				<tr id="datesuspended"><td>Date suspension</td><td><input type="text" name="datesuspended" class="coachdate"></div></td></tr>
+				<tr id="datesuspended"><td>Date suspension</td><td><input type="text" name="datesuspended" class="coachdate"></td></tr>
 				<tr id="eventtimepassed"><td>Temps passé (min.)</td><td><input type="text" name="passedtime" value="" style="width:50px"></td></tr>
-				<tr><td>Résumé (optionnel)</td><td style="text-align: left"><input type="text" name="casedetails" value="" width="800" maxlength="255"></td></tr>
+				<tr id="casedetailsTR"><td>Résumé (optionnel)</td><td style="text-align: left"><input type="text" name="casedetails" value="" width="800" maxlength="255"></td></tr>
 			</table>
 			<input type="hidden" value="newevent" name="action">
 		</form>
 		<button id="buttonCEReset" class="coachformbutton" onclick="resetNewEvent()">Reset</button>
-		<button id="buttonCESubmit" class="coachformbutton" onclick="$('#formEvent').submit()">Valider</button>
+		<button id="buttonCESubmit" class="coachformbutton" onclick="submitFormEvent()">Valider</button>
 	</div>
 
+			
 	<div id="resCase">
 	</div>
 </div>
 
 <script>
 //	var packAmount = { "demarrage":"330", "construction":"330", "optimisation":"440", "performance":"440", "securite":"440", "expert1h":"160", "expert2h":"270", "expert4h":"490", "expertannee":"1500", "prestadevis":"", "logbronze":"330", "logsilver":"880", "loggold":"1300", "logplatinum":"2600", "formation1h":"160", "formation2h":"290", "formation4h":"590" };
-	var packAmount = { "demarrage":"220", "optimisation":"160", "expert1h":"120", "expert2h":"220", "expert4h":"400", "expertannee":"1500", "prestadevis":"", "logbronze":"300", "logsilver":"550", "loggold":"1000", "logplatinum":"1500", "formation1h":"160", "formation2h":"290", "formation4h":"590", "formationVCD":"600" };
-	var packTime = { "expert1h":"60", "expert2h":"120", "expert4h":"240", "expertannee":"600", "formation1h":"60", "formation2h":"120", "formation4h":"240", "formationVCD":"240" };
-
+	
+	//var packAmount = { "demarrage":"220", "optimisation":"160", "expert1h":"120", "expert2h":"220", "expert4h":"400", "expertannee":"1500", "prestadevis":"", "logbronze":"300", "logsilver":"550", "loggold":"1000", "logplatinum":"1500", "formation1h":"160", "formation2h":"290", "formation4h":"590", "formationVCD":"600" };
+	//var packTime = { "expert1h":"60", "expert2h":"120", "expert4h":"240", "expertannee":"600", "formation1h":"60", "formation2h":"120", "formation4h":"240", "formationVCD":"240" };
+	
+	
+	
+	//function called when  uploading files, show the image "uploading"
+	function startUpload() {
+		document.getElementById('f1_upload_process').style.visibility = 'visible';
+		return true;
+	}
+	
+	//function called when ending uploading files, hide the image "uploading"
+	//when failed, alert the error 
+	function stopUpload(result) {
+		//alert(result);
+		if(result == 1) 	ajaxUpdatePJList();
+		else if(result == 2)	alert("Fichier téléchargé est trop grand (taille max: 2Mo)");
+		else if(result == 3)	alert("Un nom du fichier ne doit contenir que les caractères suivants: a-z A-Z 0-9  _  -  .  espace");
+		else {
+			alert(" Téléchargement échoué, result = "+result);
+		}
+		document.getElementById('f1_upload_process').style.visibility = 'hidden';	
+		return true; 
+	}
+	
+	
+	/**********************   upload functions called when change the value of radio buttons *************/
 	function updateAccountname() {
 		var c;
 		if ($("input:text[name='accountname']").val() != "") {
@@ -751,66 +1026,98 @@ transform-origin: 100% 240px;
 		resetNewCase();
 	}
 	
-	function updatePackCC(param) {
-//		if (param == "amount") {
+	function updatePackCC() {
+
+		//show casePack selected
+		for(var i=0; i<offreArray.length; i++) {
+			var offrename = offreArray[i];
+			if(coachoffer == offrename || $("input:radio[name='caseoffer']:checked").val() == offrename) {
+				packid = "input:radio[name='casepack"+offrename+"']:checked";
+				packname = $(packid).val();
+				//alert(packname);
+				break;
+			}
+		}
+			/* 
 			if (coachoffer == "FS" || $("input:radio[name='caseoffer']:checked").val() == "FS") {
 				packname = $("input:radio[name='casepackfs']:checked").val();
-				$("input[name=amountfs]").val(packAmount[packname]);
-			} else {
-				if (coachoffer == "FCE" || $("input:radio[name='caseoffer']:checked").val() == "FCE") {
-					packname = $("input:radio[name='casepackfc']:checked").val();				
-					$("input[name='amountfc']").val(packAmount[packname]);
-				} else {
-					if (coachoffer == "FCA" || $("input:radio[name='caseoffer']:checked").val() == "FCA") {
-						packname = $("input:radio[name='casepackfc']:checked").val();				
-						$("input[name='amountfca']").val(packAmount[packname]);
-					}
-				}
+			} 
+			else if (coachoffer == "FCE" || $("input:radio[name='caseoffer']:checked").val() == "FCE") {
+				packname = $("input:radio[name='casepackfc']:checked").val();				
 			}
-//		} else {
-//			$("#casePackFC").css("display","none");
-//			$("#casePackFS").css("display","none");
-//			if (param != 'reset') {
-//				if ((coachoffer == "FS" || $("input:radio[name='caseoffer']:checked").val() == "FS") && $( "input:radio[name='casetype']:checked" ).val() == "prestation") {
-//					$("#casePackFS").css("display","table-row");
-//				} else if ($( "input:radio[name='casetype']:checked" ).val() == "prestation") {
-//					$("#casePackFC").css("display","table-row");
-//				}
-//			}
-//		}
+			else if (coachoffer == "FCA" || $("input:radio[name='caseoffer']:checked").val() == "FCA") {
+					packname = $("input:radio[name='casepackfc']:checked").val();				
+			} */
+			if(packAmount[packname] == 'NULL') {
+				$("input[name='amountinput']").val("");
+				$("input[name='amountinput']").prop('disabled',false);
+			}
+			else {
+				$("input[name='amountinput']").val(packAmount[packname]);
+				$("input[name='amountinput']").prop('disabled',true);
+			}
+		
 	}
 
 	function updateCaseType() {
+		
+		$("input:text[name='amountinput']").val("");
+
 		if ($("input:radio[name='casetype']:checked").val() == "prestation") {
-	//alert(coachoffer+"#"+$("input:radio[name='caseoffer']").val());
-			if (coachoffer == "FS" || $("input:radio[name='caseoffer']:checked").val() == "FS") {
-				$("#casePackFS").css("display","table-row");
+		
+		for(var i=0; i<offreArray.length; i++) {
+			if(coachoffer == offreArray[i] || $("input:radio[name='caseoffer']:checked").val() == offreArray[i]) {
+				packid = "#casePack"+offreArray[i];
+				$(packid).css("display","table-row");
+				break;
 			}
-			if (coachoffer == "FCE" || $("input:radio[name='caseoffer']:checked").val() == "FCE") {
-				$("#casePackFC").css("display","table-row");
+		}
+			//$("input:radio[name='casepack']").prop("checked",false);
+			$("#amountdiv").css("display","table-row");
+			
+			//$("input:radio[name='casepack']").button("refresh");
+		} 
+		
+		else if($("input:radio[name='casetype']:checked").val() == "devis"){
+			
+			//hide all casePacks
+			for(var i=0; i<offreArray.length; i++) {
+				packid = "#casePack"+offreArray[i];
+				$(packid).css("display","none");
 			}
-			if (coachoffer == "FCA" || $("input:radio[name='caseoffer']:checked").val() == "FCA") {
-				$("#casePackFCA").css("display","table-row");
-			}
-		} else {
+			/* 
 			$("#casePackFC").css("display","none");
 			$("#casePackFS").css("display","none");
-			$("#casePackFCA").css("display","none");
+			$("#casePackFCA").css("display","none"); */
+			
+			
+			$("#amountdiv").css("display","table-row");
+			$("input[name='amountinput']").prop('disabled',false);
 		}
+		else {
+			//hide all casePacks
+			for(var i=0; i<offreArray.length; i++) {
+				packid = "#casePack"+offreArray[i];
+				$(packid).css("display","none");
+			}
+			
+			$("#amountdiv").css("display","none");
+		}
+		
 	}
 	
 	function updateOrigRole() {
 		var idcase = $("#newEvent").parent().get(0).id;
-//		var casetype = $("#"+idcase+">div.cccentre>div.cctype>div.cctypepacknom").val();
 		var casetype;
 
 		if ($("input:radio[name='origrole']:checked").val() == "cloudcoach") {
 			$("#origname").css("display","none");
 			$("input:text[name='origname']").val("");
-//	alert(idcase+"#"+casetype+"#"+packTime[casetype]);
+
 			if ($("#"+idcase+">div.cccentre>div.cctype>div.cctypepacknom").length) {
 				casetype = $("#"+idcase+">div.cccentre>div.cctype>div.cctypepacknom").attr("packname");
-				if (packTime[casetype] != "") {  $("#eventtimepassed").css("display","table-row"); }
+				
+				if (packTime[casetype] != "NULL") {  $("#eventtimepassed").css("display","table-row"); }
 				else { $("input:text[name='passedtime']").val(""); $("#eventtimepassed").css("display","none"); }
 			} else {
 				$("input:text[name='passedtime']").val(""); $("#eventtimepassed").css("display","none");
@@ -866,13 +1173,22 @@ transform-origin: 100% 240px;
 		updateEventType();
 	}
 
-//	alert(coachoffer);
+	
+	
+	
 	if (coachoffer == "" || coachoffer == "TOUTES") {
 		$("#buttonOffer").buttonset();
-		$("#buttonOffer").change( function() { resetNewCase(); } )
+		$("#buttonOffer").change( function() { 
+												console.log("buttonofferchange"); 
+												caseofferchange = 1 ;
+												resetNewCase();
+												
+											 } );
 	} else {
 		$("#newcaseoffer").css("display","none");
 	}
+
+	
 //	if (coachaccount != "") {
 //		$("#newcaseaccount").css("display","none");
 //	}
@@ -881,14 +1197,22 @@ transform-origin: 100% 240px;
 //	$("#infoAccount").click( function () { $("#infoAccountContainer").toggleClass('flipped'); } );
 	$("#buttonCaseType").buttonset();
 //	$("#buttonCaseType").change( function() { updatePackCC(); } )
-	$("#buttonPackFC").buttonset();
-	$("#buttonPackFC").change( function() { updatePackCC('amount'); } )
-	$("#buttonPackFS").buttonset();
-	$("#buttonPackFS").change( function() { updatePackCC('amount'); } )
-	$("#buttonPackFCA").buttonset();
-	$("#buttonPackFCA").change( function() { updatePackCC('amount'); } )
-
-	$("#buttonOrigRole").buttonset();
+	
+	
+	//icon clicked for unloading files
+	$("#upfileIcone").click(function () {
+		$("#fileToUpload").trigger('click');
+	});
+	
+	//name of selected file to upload
+	$('#fileToUpload').change(function () {
+		$('#selectedFile').html($('#fileToUpload').val());
+		if($('#fileToUpload').val() != "")	$('#addButton').css("display","inline");
+	});
+	
+	
+	//*******  set buttons and datepicker  ***********************/
+ 	$("#buttonOrigRole").buttonset();
 	$("#buttonOrigRole").change( function() { updateOrigRole(); } )
 	$("#buttonCCCoachEnCharge").buttonset();
 	$("#buttonCECoachEnCharge").buttonset();
@@ -908,27 +1232,43 @@ transform-origin: 100% 240px;
 //	$( "input:text[name='eventdate']" ).datepicker({ maxDate: new Date("+0d") });
 	$("#buttonCCReset").button();
 	$("#buttonCCSubmit").button();
+	$('#buttonCCSubmit').prop('disabled',false);
 	$("#buttonCEReset").button();
 	$("#buttonCESubmit").button();
 	
-//	$( "input:text[name='origname']" ).autocomplete({
-//  source: [ "c++", "java", "php", "coldfusion", "javascript", "asp", "ruby" ]
-//});
+
 	
-	//	$( "#casestatus1" ).button();
-	//ajaxCoach();
-	//ajaxNewCase();
-	//$( "#datepicker" ).datepicker();
+	/*used to pretend multiple submissions of forms */
+	function submitFormCase() {
+		$('#formCase').submit();
+		$('#buttonCCSubmit').prop("disabled",true);
+		
+		//enable the submit button after 1 second
+		setTimeout(function(){
+			$('#buttonCCSubmit').prop("disabled",false);
+			$('#buttonCCSubmit').removeClass("ui-state-hover");
+		},1000);
+	}	
+	
+	function submitFormEvent() {
+		$('#formEvent').submit();
+		$('#buttonCESubmit').prop("disabled",true);
+		
+		//enable the submit button after 1 second
+		setTimeout(function(){
+			$('#buttonCESubmit').prop("disabled",false);
+			$('#buttonCESubmit').removeClass("ui-state-hover");
+		},1000);
+	}
+
+	
+	
+	/*set the function to be called for all the radio buttons*/
 	$("input:text[name='accountname']").change( function() {
 												updateAccountname();
 								} );
 
-	$("input:radio[name='caseoffer']").change( function() {
-												updateCoachOffer();
-								} );
-
 	$("input:radio[name='casetype']").change( function() {
-	//alert(coachoffer+"#"+$("input:radio[name='caseoffer']:checked").val());
 												updateCaseType();
 								} );
 
@@ -939,26 +1279,30 @@ transform-origin: 100% 240px;
 	$("input:radio[name='medium']").change( function() {
 												updateMedium();
 								} );
-
-	$("input:radio[name='casepackfc']").change( function() {
-												updatePackCC();
-								} );
-	$("input:radio[name='casepackfs']").change( function() {
-												updatePackCC();
-								} );
-	$("input:radio[name='casepackfca']").change( function() {
-												updatePackCC();
-								} );
-
+	
+	//casepacks
+	for(var i=0; i<offreArray.length; i++) {
+		packid ="input:radio[name='casepack"+offreArray[i] + "']";
+		$(packid).change( function() { updatePackCC(); } )
+	}
+	
+	for(var i=0; i<offreArray.length; i++) {
+		packid = "#buttonPack" +offreArray[i];
+		$(packid).buttonset();
+		$(packid).change( function() { updatePackCC(); } )
+	}
+								
+								
 	$("input:text[name='msctid']").change( function() {
 												if ($("textarea[name='cedetails']").val() == "") { $("textarea[name='cedetails']").val("Dépôt de la demande "+$("input:text[name='msctid']").val()); }
 								} );
 
 	$("#newcasecoach").click( function() {
-								if ($("#newCase").css("display") == "none") { resetNewCase(); }
-								$("#newCase").toggle("blind",{"direction":"up"});
-								} );
+							showNewCase();
+							} );
 //	$("#showinfocoachaccount").click( function() {
 //								$("#infoAccount").toggle("blind",{"direction":"up"});
 //								} );
+
+
 </script>
